@@ -1,4 +1,4 @@
-import receipts from "../receipts/receipts1";
+import receipts from "../receipts/receipts6";
 
 export class Generate {
 
@@ -115,26 +115,30 @@ export class Generate {
   }
   
 const generate = new Generate();
-const depthLimit = 6;
+const output = generate.createOperations(receipts);
 
-function render () {
-	const output = generate.createOperations(receipts);
-	for (const item of output) {
-		let depth = 0;
-		console.log(depth, "-", ">", item.type, item.receipts.length);
-		renderR(item, depth);
-	}
-}
+console.log(output);
+// console.log(JSON.stringify(output, undefined, "  "));
+// const depthLimit = 6;
 
-function renderR (item: any, depth: number) {
-	if (depth++ >= depthLimit) return;
-	if (!item.receipts) return;
-	for (const subitem of item.receipts) {
-		const length = subitem.receipts?.length || 0;
-		const type = subitem.item.receiptType;
-		console.log(depth, "-".repeat(depth * 2), ">", type, length, (type === "CALL") ? subitem.item.to : "");
-		if (length > 0) renderR(subitem, depth);
-	}
-}
+// function render () {
+// 	const output = generate.createOperations(receipts);
+// 	for (const item of output) {
+// 		let depth = 0;
+// 		console.log(depth, "-", ">", item.type, item.receipts.length);
+// 		renderR(item, depth);
+// 	}
+// }
 
-render();
+// function renderR (item: any, depth: number) {
+// 	if (depth++ >= depthLimit) return;
+// 	if (!item.receipts) return;
+// 	for (const subitem of item.receipts) {
+// 		const length = subitem.receipts?.length || 0;
+// 		const type = subitem.item.receiptType;
+// 		console.log(depth, "-".repeat(depth * 2), ">", type, length, (type === "CALL") ? subitem.item.to : "");
+// 		if (length > 0) renderR(subitem, depth);
+// 	}
+// }
+
+// render();
